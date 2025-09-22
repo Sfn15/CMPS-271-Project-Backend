@@ -1,11 +1,13 @@
 package testing.demo.Classes;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Users")
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //makes id auto increment
     private int id;
     private String name;
     private String email;
@@ -21,6 +23,7 @@ public class User {
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
