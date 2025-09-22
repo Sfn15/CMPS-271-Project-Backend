@@ -12,13 +12,15 @@ public class User {
     private String name;
     private String email;
     private String phone_number;
-    private String passsword;
+
+    @Column(name = "password")
+    private String password;
 
     public String getPassword(){
-        return passsword;
+        return password;
     }
     public void setPassword(String pword){
-        this.passsword = pword;
+        this.password = pword;
     }
     public int getId() {
         return id;

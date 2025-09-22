@@ -21,6 +21,7 @@ public class AuthController {
         return authService.register(request.getEmail(), request.getPassword(), request.getName());
     }
 
+    @PostMapping("/login")
     public String login(@RequestBody LoginRequest request){
         return authService.login(request.getEmail(),request.getPassword());
     }

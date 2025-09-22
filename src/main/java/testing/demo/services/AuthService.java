@@ -23,7 +23,7 @@ public class AuthService {
         User user = new User();
         user.setEmail(email);
         user.setName(name);
-        user.setPassword(rawPassword);
+        user.setPassword(passwordEncoder.encode(rawPassword));
         userRepository.save(user);
         
         return "User registered successfully";
