@@ -1,5 +1,7 @@
 package testing.demo.Classes;
 
+import java.util.UUID;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -8,7 +10,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //makes id auto increment
-    private int id;
+    private UUID id;
     private String name;
     private String email;
     private String phone_number;
@@ -22,11 +24,11 @@ public class User {
     public void setPassword(String pword){
         this.password = pword;
     }
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(UUID id) {
         this.id = id;
     }
     public String getName() {
