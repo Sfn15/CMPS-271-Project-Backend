@@ -3,6 +3,8 @@ package testing.demo.services;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import testing.demo.Classes.User;
+import testing.demo.Classes.exceptions.EmailAlreadyExistsException;
+import testing.demo.Classes.exceptions.UserNotFoundException;
 import testing.demo.repository.UserRepository;
 
 @Service
@@ -17,7 +19,7 @@ public class AuthService {
 
     public String register(String email, String rawPassword, String name){
         if(userRepository.findByEmail(email) != null){
-            return "Email already exists!";
+            throw new EmailAlreadyExistsException("Email already exists: " + email);
         }
 
         User user = new User();
@@ -33,13 +35,13 @@ public class AuthService {
         User user = userRepository.findByEmail(email);
 
         if(user == null){
-            return "User not found";
+            throw new UserNotFoundException("No user found with email address:" + email);
         }
 
         if(passwordEncoder.matches(rawPassword, user.getPassword())){
             return "Welcome back, " + user.getName() + "!";
         } else {
-            return "Email or password are incorrect.";
+            throw new RuntimeException("Invalid password!");
         }
     }
 }

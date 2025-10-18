@@ -1,0 +1,17 @@
+The shell is very interesting to work with.
+
+First of all you have to enable interactive mode for the shell in application.properties before you can do anything.
+
+Second, unning the spring app itself hijacks the terminal, so you can't actually type anything there.
+
+The workaround I used was to force spring shell to use a simple terminal mode by doing the following:
+
+./gradlew bootJar 
+
+and then running the jar with the option
+
+-Djline.terminal=jline.UnsupportedTerminal 
+
+that still didn't work, and the fix for that was adding a --% before it so that powershell would stop interpreting the command
+because it messed it up somehow.
+
