@@ -28,11 +28,21 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(EmailAlreadyExistsException.class)
-    public ResponseEntity<Map<String,Object>> handleEmailAlreadyExists(UserNotFoundException ex){
+    public ResponseEntity<Map<String,Object>> handleEmailAlreadyExists(EmailAlreadyExistsException ex){
         Map<String, Object> error = new HashMap<>();
         error.put("timestamp", LocalDateTime.now());
         error.put("status", HttpStatus.CONFLICT.value());
         error.put("error","Email already exists");
+        error.put("message", ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(WrongPasswordException.class)
+    public ResponseEntity<Map<String,Object>> handleWrongPasswordException(WrongPasswordException ex){
+        Map<String,Object> error = new HashMap<>();
+        error.put("timestamp", LocalDateTime.now());
+        error.put("status", HttpStatus.CONFLICT.value());
+        error.put("error", "Password does not match");
         error.put("message", ex.getMessage());
         return new ResponseEntity<>(error, HttpStatus.CONFLICT);
     }

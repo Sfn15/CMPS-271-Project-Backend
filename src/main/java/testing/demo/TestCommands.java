@@ -16,4 +16,9 @@ public class TestCommands {
     public String echo(String text){
         return text;
     }
+
+    @ShellMethod("Check the email password")
+    public String password(){
+        return "mail password: " + System.getenv("MAIL_PASS");
+    }
 }

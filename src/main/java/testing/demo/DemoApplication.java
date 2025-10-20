@@ -17,6 +17,7 @@ import org.springframework.boot.CommandLineRunner;
 public class DemoApplication {
 
 	public static void main(String[] args) {
+		System.out.println(System.getenv("MAIL_PASS"));
 		SpringApplication.run(DemoApplication.class, args);
 	}
 }

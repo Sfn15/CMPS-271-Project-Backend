@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import testing.demo.Classes.User;
 import testing.demo.Classes.exceptions.EmailAlreadyExistsException;
 import testing.demo.Classes.exceptions.UserNotFoundException;
+import testing.demo.Classes.exceptions.WrongPasswordException;
 import testing.demo.repository.UserRepository;
 
 @Service
@@ -32,6 +33,8 @@ public class AuthService {
     }
 
     public String login(String email, String rawPassword){
+
+    try{
         User user = userRepository.findByEmail(email);
 
         if(user == null){
@@ -41,7 +44,11 @@ public class AuthService {
         if(passwordEncoder.matches(rawPassword, user.getPassword())){
             return "Welcome back, " + user.getName() + "!";
         } else {
-            throw new RuntimeException("Invalid password!");
+            throw new WrongPasswordException("Invalid password!");
         }
+    } catch (Exception e){
+        e.printStackTrace();
+        throw e;
+    }
     }
 }
