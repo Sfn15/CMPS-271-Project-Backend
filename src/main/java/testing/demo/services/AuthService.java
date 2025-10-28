@@ -33,8 +33,6 @@ public class AuthService {
     }
 
     public String login(String email, String rawPassword){
-
-    try{
         User user = userRepository.findByEmail(email);
 
         if(user == null){
@@ -46,9 +44,6 @@ public class AuthService {
         } else {
             throw new WrongPasswordException("Invalid password!");
         }
-    } catch (Exception e){
-        e.printStackTrace();
-        throw e;
-    }
+
     }
 }
